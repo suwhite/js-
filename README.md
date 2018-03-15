@@ -1,7 +1,6 @@
 # js多线程的简单操作
 ## * 多线程
-   所谓多线程，就是可以让javascript函数能够在多个进程中进行或者说是可以让部分代
-码在后台运行。这样大大减少了浏览器在运行复杂的JavaScript脚本是发生假死现象的概率。这便是多线程的作用，提高浏览器的使用效率。
+所谓多线程，就是可以让javascript函数能够在多个进程中进行或者说是可以让部分代码在后台运行。从而让js的进程可以继续运行下去，大大减少了浏览器在运行复杂的JavaScript脚本时发生假死现象的概率。这便是多线程的作用，提高浏览器的使用效率。
 ## * Web workers
  Web workers 是一种可以让web应用程序具备后台处理能力的方法。利用web workers，
 我们可以创建一个不影响前台处理的后台线程，并且可以在这个后台线程中创建多个子线程。而且web workers的使用步骤十分简单，可以快速上手。
@@ -79,17 +78,18 @@ Web workers不能自行终止，但能够被起用他们的页面所终止。而
     }
     var id = setInterval(mainFunc,1000);
 运行起来我们会发现
-
-
-点击确定后，它的数值并非2，而是一个比2更大的数
-1014798-20160907200222066-854913259.png
+ ![Aaron Swartz](js-/2.png) <br>
+点击确定后，它的数值并非2，而是一个比2更大的数 <br>
+![图2]（js-/2.png） <br>
 
 虽然dialog的弹出会阻塞js引擎线程，但是并不影响worker线程的运行，所以，在我们点击确定后，只是在js引擎线程上更新了新的内容，而数值是一直在跑动的，这就说明worker线程和原本的js线程互不影响.
 
-那么既然互不影响，两个线程之间要怎么来联系呢，答案其实已经在代码里了，那就是onPostMessage 和 onmessage这两个函数，其中onPostMessage（data）的参数是你要传递的数据，而onmessage是一个回调函数，只有在接受到数据时，onmessage会被回调，onmessage有一个隐藏的参数，那就是event，我们可以用event.data获取到传递过来的数据来更新主线程。
+而主线程要想与web workers线程进行通信的话，那就要通过onPostMessage 和 onmessage这两个函数，其中onPostMessage（data）的参数是你要传递的数据，而onmessage是一个回调函数，只有在接受到数据时，onmessage会被回调，onmessage有一个隐藏的参数，那就是event，我们可以用event.data获取到传递过来的数据来更新主线程。
 
 使用worker线程应注意的是，所有js里集成的对象都在js线程里，而并非worker线程。
 例如我们在worker线程里写上：
 
 var a = document.getElementById("a");
 结果你会得到一条Error，告诉你找不到document,或者document is undefined。所以我们尽量把需要的东西都写到主线程里，而只把耗时的操作写到worker线程里。
+## 自我小结
+java script是一个单线程的语言，它只能进行异步编程，而web workers的存在可以让js实现多线程的操作。将网址中数据计算的部分以及一些需要较长时间运行的脚本放置后台让web workers线程运行，再通过与web workers线程通信的方式来获取结果，这便是网页运行速度大大提高的一个重要原因，也是web workers的一大优点。
