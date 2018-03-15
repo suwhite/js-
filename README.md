@@ -33,7 +33,7 @@ Workers 通过调用onmessage()函数接收页面数据后根据不同函数的�
 Web workers不能自行终止，但能够被起用他们的页面所终止。而终止所要调用的函数是terminate(). <br>
 `终止代码：` <br>
     worker.terminate(); <br>
-## 案例
+## * 案例
     <!DOCTYPE html>
     <html>
     <head>
@@ -92,5 +92,5 @@ Web workers不能自行终止，但能够被起用他们的页面所终止。而
 
 var a = document.getElementById("a");
 结果你会得到一条Error，告诉你找不到document,或者document is undefined。所以我们尽量把需要的东西都写到主线程里，而只把耗时的操作写到worker线程里。
-## 自我小结
+## * 自我小结
 java script是一个单线程的语言，它只能进行异步编程，而web workers的存在可以让js实现多线程的操作。将网址中数据计算的部分以及一些需要较长时间运行的脚本放置后台让web workers线程运行，再通过与web workers线程通信的方式来获取结果，这便是网页运行速度大大提高的一个重要原因，也是web workers的一大优点。
