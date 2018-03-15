@@ -78,7 +78,7 @@ Web workers不能自行终止，但能够被起用他们的页面所终止。而
     }
     var id = setInterval(mainFunc,1000);
 运行起来我们会发现
- ![Aaron Swartz](js-/2.png) <br>
+ ![](https://raw.githubusercontent.com/suwhite/js-/8f747c7468a2d55a172ea2870ea221f500e70257/1.png) <br>
 点击确定后，它的数值并非2，而是一个比2更大的数 <br>
 ![图2]（js-/2.png） <br>
 
