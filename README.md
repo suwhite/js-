@@ -77,11 +77,12 @@ Web workers不能自行终止，但能够被起用他们的页面所终止。而
         postMessage(i);
     }
     var id = setInterval(mainFunc,1000);
-运行起来我们会发现
+运行起来我们会发现 <br>
  ![](https://raw.githubusercontent.com/suwhite/js-/8f747c7468a2d55a172ea2870ea221f500e70257/1.png) <br>
+ <br>
 点击确定后，它的数值并非2，而是一个比2更大的数 <br>
-![图2]（js-/2.png） <br>
-
+![](https://raw.githubusercontent.com/suwhite/js-/8f747c7468a2d55a172ea2870ea221f500e70257/2.png) <br>
+<br>
 虽然dialog的弹出会阻塞js引擎线程，但是并不影响worker线程的运行，所以，在我们点击确定后，只是在js引擎线程上更新了新的内容，而数值是一直在跑动的，这就说明worker线程和原本的js线程互不影响.
 
 而主线程要想与web workers线程进行通信的话，那就要通过onPostMessage 和 onmessage这两个函数，其中onPostMessage（data）的参数是你要传递的数据，而onmessage是一个回调函数，只有在接受到数据时，onmessage会被回调，onmessage有一个隐藏的参数，那就是event，我们可以用event.data获取到传递过来的数据来更新主线程。
